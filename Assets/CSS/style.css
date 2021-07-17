@@ -1,4 +1,13 @@
+/* Styling to get the Timer and Highscore aligned at the top */
+.nav {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-direction: row;
+    flex: nowrap;
+}
 
+/* Styling to get the main quiz sections aligned and button format */
 .main {
     margin: auto;
     width: 50%;
@@ -6,8 +15,38 @@
     text-align: center;
 }
 
-#initiate {
+.btn {
     background-color: purple;
     color: white;
-    border-radius: 12px;
+    border-radius: 10px;
+}
+
+.questions {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 100px;
+    padding-top: 10px;
+    height: 100px;
+    width: 180px;
+}
+
+.right_answer {
+    text-align: left;
+    opacity: .5;
+    border-top: lightcoral 2px solid;
+    color: gray;
+}
+
+.wrong_answer {
+    text-align: left;
+    opacity: .5;
+    border-top: lightcoral 2px solid;
+    color: gray;
 }
