@@ -1,19 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Assets/CSS/style.css"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Assets/CSS/style.css" />
     <title>Javascript Fundamentals Quiz</title>
-</head>
-<div id = "high_score"></div>
-<div id = "timer"></div>
-<body>
-    <div class = "main">
-    <h1 id = "title"> Coding Quiz Challenge</h1>
-    <p id = "intro"> Try to answer the following Javascript questions within the time limit.<br> Incorrect answers will penalize your time.<br> Try to get a High Score! </p>
-    <button id ="initiate">Start Quiz</button>
+  </head>
+
+  <body>
+    <div class="nav">
+      <div class="high_score">High Scores</div>
+      <div class="timer" id="time"></div>
     </div>
-</body>
+
+    <div class="main">
+      <div id="intro">
+        <h1 class="title">Coding Quiz Challenge</h1>
+        <p class="rules">
+          Try to answer the following Javascript questions within the time
+          limit.<br />
+          Incorrect answers will penalize your time.<br />
+          Try to get a High Score!
+        </p>
+        <button class="btn" id="start_quiz">Start Quiz</button>
+      </div>
+
+      <div class="questions" id="questionDiv">
+        <div class="questionArray" id="array" hidden>
+          <h1 class="question_header" id="header"></h1>
+          <div class="buttons" id="questionButtons">
+            <button class="btn" id="btn1"></button>
+            <button class="btn" id="btn2"></button>
+            <button class="btn" id="btn3"></button>
+            <button class="btn" id="btn4"></button>
+          </div>
+        </div>
+      </div>
+
+      <div id="scores" class="scorePage" hidden>
+        <h1 class="scoreTitle">All Done!</h1>
+        <p class="finalScore"></p>
+        <form class=enterScore>
+          <label for="initials">Enter Your Initials:</label>
+          <input type="text">
+          <button class="btn" id="submit_name">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="Assets/JS/script.js"></script>
+  </body>
 </html>
