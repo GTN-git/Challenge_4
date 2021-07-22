@@ -58,6 +58,7 @@ var scorePage = document.getElementById("scores");
 var buttonScoreSubmit = document.getElementById("submit_name");
 var scoreForm = document.getElementById("scoreForm");
 var finalScore = document.getElementById("finalScore");
+var highScoreArray =[];
 
 // begin quiz
 function beginQuiz() {
@@ -123,7 +124,6 @@ function endGame() {
   finalScore.textContent = "Your final score is " + timeLeft;
   timeEl.textContent = timeLeft + " seconds remaining";
   clearInterval(timeInterval);
-  //end timer
 }
 
 function storeScore(event) {
@@ -131,19 +131,11 @@ function storeScore(event) {
   if (scoreForm === "" || scoreForm === null) {
     window.alert("Please enter your initials");
   } else {
-    var highScore = { initials: scoreForm.value, score: timeLeft };
-    highScore = JSON.stringify(highScore);
-    localStorage.setItem("Initials", highScore);
+    localStorage.setItem(scoreForm.value, timeLeft);
   }
   //go to highscore page once submit is selected
-  window.location.href = "../Challenge_4/highscores.html";
+ window.location.href = "../Challenge_4/highscores.html";
 }
-
-// put scores inside of an array and save to single key "initials"
-// when timer reaches 0 kick to all done initials form page
-// so many wrong = 0 and kick to all done page
-// add event listeners to high scores button
-// go back button should go back to index.html page
 
 // click start and event listener
 startQuiz.addEventListener("click", beginQuiz);
