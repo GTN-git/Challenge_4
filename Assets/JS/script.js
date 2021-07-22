@@ -2,7 +2,7 @@
 var startQuiz = document.getElementById("start_quiz");
 //timer variables
 var timeEl = document.getElementById("time");
-var timeLeft = 100;
+var timeLeft = 40;
 var timeInterval;
 //intro and end page elements
 var title = document.getElementById("intro");
@@ -21,19 +21,22 @@ var questions = [
     a2: "Document Object Model",
     a3: "Danger Ocean Modules",
     a4: "Data Object Manipulator",
-  },{
+  },
+  {
     q: "What is a variable?",
     a1: "Named storage for data",
     a2: "An element from the document",
     a3: "A function",
     a4: "A call in Javascript",
-  },{
+  },
+  {
     q: "What is an array?",
     a1: "Multiple variables",
     a2: "A variable used to store multiple values",
     a3: "An index",
     a4: "A for loop",
-  },{
+  },
+  {
     q: "What does a for loop do?",
     a1: "Run through an array",
     a2: "Operate an if statement",
@@ -51,7 +54,10 @@ var correct = [
 ];
 var score = 0;
 //score page variables
-var scorePage = document.getElementsByClassName("scorePage");
+var scorePage = document.getElementById("scores");
+var buttonScoreSubmit = document.getElementById("submit_name");
+var scoreForm = document.getElementById("scoreForm");
+var finalScore = document.getElementById("finalScore");
 
 // begin quiz
 function beginQuiz() {
@@ -61,7 +67,6 @@ function beginQuiz() {
 
 // start the countdown
 function countdown() {
-
   timeInterval = setInterval(function () {
     if (timeLeft > 1) {
       timeEl.textContent = timeLeft + " seconds remaining";
@@ -72,7 +77,6 @@ function countdown() {
     } else {
       timeEl.textContent = "";
       clearInterval(timeInterval);
-
     }
   }, 1000);
 }
@@ -87,15 +91,13 @@ function question() {
   button2.textContent = questions[questionIndex].a2;
   button3.textContent = questions[questionIndex].a3;
   button4.textContent = questions[questionIndex].a4;
-  console.log(questionIndex);
 }
 
 //check the answer via the array and move through and deduct time from wrong answer
 function checkAnswer(event) {
   if (event.target.textContent === correct[questionIndex]) {
-    score++;
     alert("Correct");
-    if (questionIndex > questions.length) {
+    if (questionIndex > questions.length - 2) {
       endGame();
     } else {
       questionIndex++;
@@ -104,7 +106,7 @@ function checkAnswer(event) {
   } else {
     timeLeft = timeLeft - 10;
     alert("Incorrect");
-    if (questionIndex > questions.length) {
+    if (questionIndex > questions.length - 2) {
       endGame();
     } else {
       questionIndex++;
@@ -118,14 +120,30 @@ function endGame() {
   window.alert("The quiz is finished. Let's store your score");
   questionArray.setAttribute("hidden", true);
   scorePage.removeAttribute("hidden");
-
+  finalScore.textContent = "Your final score is " + timeLeft;
+  timeEl.textContent = timeLeft + " seconds remaining";
+  clearInterval(timeInterval);
+  //end timer
 }
 
-//select answer, if wrong deduct 10 seconds and flash right or wrong and move to next hide current and show next
+function storeScore(event) {
+  event.preventDefault();
+  if (scoreForm === "" || scoreForm === null) {
+    window.alert("Please enter your initials");
+  } else {
+    var highScore = { initials: scoreForm.value, score: timeLeft };
+    highScore = JSON.stringify(highScore);
+    localStorage.setItem("Initials", highScore);
+  }
+  //go to highscore page once submit is selected
+  window.location.href = "../Challenge_4/highscores.html";
+}
 
-// your score is based on time and enter initial save to local storage
-
-//display when you get to high scores page
+// put scores inside of an array and save to single key "initials"
+// when timer reaches 0 kick to all done initials form page
+// so many wrong = 0 and kick to all done page
+// add event listeners to high scores button
+// go back button should go back to index.html page
 
 // click start and event listener
 startQuiz.addEventListener("click", beginQuiz);
@@ -134,3 +152,5 @@ button1.addEventListener("click", checkAnswer);
 button2.addEventListener("click", checkAnswer);
 button3.addEventListener("click", checkAnswer);
 button4.addEventListener("click", checkAnswer);
+//event listener for storing name and score
+buttonScoreSubmit.addEventListener("click", storeScore);
